@@ -143,3 +143,33 @@ class Post(SearchableMixin, db.Model):
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
+
+# idk..........
+
+
+class Entry(Post):
+    enable_typechecks = False
+    __tablename__ = 'entry'
+    id = db.Column(db.Integer, primary_key=True)
+    entry_id = db.Column(db.ForeignKey(Post.user_id))
+    entryentry = db.relationship(
+        Post, backref=db.backref('entry', uselist=False))
+
+    # enable_typechecks = False
+    # ===============These from form wtf forms done?
+
+    choose_title = db.Column(db.String(90))
+    choose_warmedup = db.Column(db.String(90))
+    choose_cooldown = db.Column(db.String(90))
+
+# ===============These from radio and user uploda Not done?
+    # choose_activity = db.Column(db.String(90))
+    # choose_effort = db.Column(db.String(90))
+    # gps_data = db.Column(db.String(300))
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'manager',
+        'concrete': False}
+
+    def __repr__(self):
+        return '<Post {}>'.format(self.body)

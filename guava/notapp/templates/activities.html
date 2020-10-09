@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+Stay Active!
+{% endblock %}
+
+{% block app_content %}
+<h3><b>Choose Your Activity:</h3>
+</p>
+
+<div>
+    <form>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-primary active">
+                <input type="radio" name="options" id="Run" autocomplete="off" checked> Run
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="Bike" autocomplete="off"> Bike
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="Walk" autocomplete="off"> Walk
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="Yoga" autocomplete="off"> Yoga
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="Swimming" autocomplete="off"> Swimming
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="Kayaking" autocomplete="off"> Kayaking
+            </label>
+        </div>
+    </form>
+    <br>
+
+</div>
+
+<div>
+    <h4><b>Select an effort level that best fits today's moves:</b></h4>
+    <form>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-primary active">
+                <input type="radio" name="options" id="Run" autocomplete="off" checked> Peaceful
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="Bike" autocomplete="off"> Relaxed
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="Walk" autocomplete="off"> Modest
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="Yoga" autocomplete="off"> Demanding
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="options" id="Swimming" autocomplete="off"> Challenging
+            </label>
+
+    </form>
+</div>
+<br>
+
+<div class='activity'>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <d1>
+
+            {{ wtf.form_field(form.activity_title, class='form-control', placeholder='My Monday Morning Moves...') }}
+            {{ wtf.form_field(form.feeling_before, class='form-control', placeholder='Felt good....or...I was feeling lazy...') }}
+            {{ wtf.form_field(form.feeling_after, class='form-control', placeholder='Feeling great now...I really need a snack...') }}
+        </d1>
+
+        <br>
+        <p>
+            Have some numbers/ metrics/ or GPS data?
+            <a href="{{ url_for('reset_password_request') }}">Click to save them!</a>
+        </p>
+
+        <button type="button" class="btn btn-secondary btn-lg">Upload GPS Data</button>
+        <button type="button" class="btn btn-primary btn-lg">Let's Save These Moves</button>
+
+
+        {{ form.submit( class_='btn btn-default') }}
+
+
+
+
+    </form>
+
+</div>
+{% endblock %}

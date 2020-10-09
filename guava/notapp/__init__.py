@@ -16,7 +16,7 @@ from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from elasticsearch import Elasticsearch
 
-
+DEBUG = True
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)

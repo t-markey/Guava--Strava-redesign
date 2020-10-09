@@ -83,3 +83,20 @@ class ResetPasswordForm(FlaskForm):
     password2 = PasswordField(
         'Repeat Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Request Password Reset')
+
+
+class ActivityForm(FlaskForm):
+    # Need to add radio fields and gps to this ????
+    # add limit validators to match db
+
+    activity_title = StringField(
+        'Let\'s put a name to that workout!', validators=[DataRequired()])
+    feeling_before = StringField(
+        'How did you feel before you were warmed up', validators=[DataRequired()])
+    feeling_after = StringField(
+        'And what about after?', validators=[DataRequired()])
+    submit = SubmitField('Upload Activity')
+
+    #     'Upload some metrics if you have them (If you feel like it )')
+    # submit = SubmitField('Save this entry, eat some fruit')
+    # What got you motivated and moving today?'

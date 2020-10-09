@@ -14,12 +14,13 @@ from notapp.forms import EditProfileForm
 from notapp import routes, models, errors
 from notapp.forms import EmptyForm
 from notapp.forms import PostForm
-from notapp.models import Post
+from notapp.models import Post, Entry
 from notapp.forms import ResetPasswordRequestForm
 from notapp.email import send_password_reset_email
 from notapp.forms import ResetPasswordForm
 from flask import g
 from notapp.forms import SearchForm
+from notapp.forms import ActivityForm
 
 
 @app.before_request
@@ -228,3 +229,19 @@ def search():
         if page > 1 else None
     return render_template('search.html', title=('Search'), posts=posts,
                            next_url=next_url, prev_url=prev_url)
+
+
+@app.route('/activities', methods=['GET', 'POST'])
+@login_required
+def activities():
+    form = ActivityForm()
+    flash('checking test ')
+    if form.validate_on_submit():
+        post = Entry(choose_title=form.activity_title.data, choose_warmedup=form.feeling_before.data,
+                     choose_cooldown=form.feeling_after.data,  author=current_user)
+
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post is now live!')
+        return redirect(url_for('explore'))
+    return render_template('activities.html', form=form)
