@@ -1,5 +1,5 @@
 import gmplot
-import auth
+import notapp.gps.auth as auth
 
 # selects the location of the map to be started at in the window
 

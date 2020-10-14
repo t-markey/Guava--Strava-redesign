@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy
-import maps
-import start
+import notapp.gps.maps as maps
+import notapp.gps.start as start
 
 # inputs string of file name
 
@@ -27,5 +27,5 @@ def outputHtml(fitFileUpload):
     mapping_code = maps.make_a_map(coordFinal, center=orienting_map)
     print(mapping_code)
 
-
-outputHtml('AA180527.fit')
+# for testing
+# outputHtml('AA180527.fit')

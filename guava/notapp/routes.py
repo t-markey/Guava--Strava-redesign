@@ -1,5 +1,5 @@
 from notapp import app
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 from notapp.forms import LoginForm
 from flask_login import current_user, login_user
 from notapp.models import User
@@ -14,13 +14,14 @@ from notapp.forms import EditProfileForm
 from notapp import routes, models, errors
 from notapp.forms import EmptyForm
 from notapp.forms import PostForm
-from notapp.models import Post, Entry
+from notapp.models import Post, Entry, FileContents
 from notapp.forms import ResetPasswordRequestForm
 from notapp.email import send_password_reset_email
 from notapp.forms import ResetPasswordForm
 from flask import g
 from notapp.forms import SearchForm
 from notapp.forms import ActivityForm
+from notapp.gps.visual import outputHtml
 
 
 @app.before_request
@@ -245,3 +246,22 @@ def activities():
         flash('Your post is now live!')
         return redirect(url_for('explore'))
     return render_template('activities.html', form=form)
+
+
+@app.route('/upload', methods=['POST'])
+@login_required
+def upload():
+    # get file from requests NO VALIDATION / SECURITY CHECK...
+    # add to only accept if it is .fit file
+    file = request.files['inputFile']
+    content = request.files['inputFile'].read()
+    print(file)
+    print(type(file))
+    # reads file and puts in database
+    newFile = FileContents(name=file.filename, dataFit=file.read())
+    # having issues here, need to input .fit file not class object.....
+    # modFile = outputHtml(str(content))
+    db.session.add(newFile)
+    db.session.commit()
+
+    return "Saved " + file.filename + " to the database"

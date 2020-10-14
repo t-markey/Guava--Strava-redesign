@@ -71,21 +71,21 @@ Stay Active!
         </d1>
 
         <br>
-        <p>
-            Have some numbers/ metrics/ or GPS data?
-            <a href="{{ url_for('reset_password_request') }}">Click to save them!</a>
-        </p>
-
-        <button type="button" class="btn btn-secondary btn-lg">Upload GPS Data</button>
         <button type="button" class="btn btn-primary btn-lg">Let's Save These Moves</button>
-
-
         {{ form.submit( class_='btn btn-default') }}
-
-
-
-
     </form>
-
 </div>
+
+
+<div class='container'>
+    <form method="POST" action='/upload' enctype='multipart/form-data'>
+        <div class='form-group'>
+            <label for="inputFile">GPS File Upload</label>
+            <input type="file" name='inputFile'>
+        </div>
+        <button type="submit" class="btn btn-secondary btn-lg">Upload GPS Data</button>
+    </form>
+</div>
+
+
 {% endblock %}

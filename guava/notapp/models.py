@@ -74,6 +74,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    gps = db.relationship('FileContents', backref='author', lazy='dynamic')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
     # +++++++++++++++++++++++++++++++++
@@ -144,7 +145,7 @@ class Post(SearchableMixin, db.Model):
     def __repr__(self):
         return '<Post {}>'.format(self.body)
 
-# idk..........
+# idk..........This is not working out, don't try to inherit from post maybe?
 
 
 class Entry(Post):
@@ -173,3 +174,11 @@ class Entry(Post):
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
+
+
+# for handling .fit files in database
+class FileContents(SearchableMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    name = db.Column(db.Integer)
+    dataFit = db.Column(db.LargeBinary)
