@@ -48,6 +48,8 @@
 </nav>
 {% endblock %}
 
+
+
 {% block scripts %}
 {{ super() }}
 {{ moment.include_moment() }}
@@ -55,6 +57,7 @@
 
 {% block content %}
 <div class="container">
+    <img src="{{url_for('static', filename='guava.png')}}" />
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
@@ -64,6 +67,9 @@
     {% endwith %}
 
     {# application content needs to be provided in the app_content block #}
-    {% block app_content %}{% endblock %}
+    {% block app_content %}
+    <img src="{{url_for('static', filename='guava.png')}}" />
+    {% endblock %}
 </div>
+
 {% endblock %}

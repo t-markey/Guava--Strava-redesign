@@ -236,7 +236,7 @@ def search():
 @login_required
 def activities():
     form = ActivityForm()
-    flash('checking test ')
+    # flash('checking test ')
     if form.validate_on_submit():
         post = Entry(choose_title=form.activity_title.data, choose_warmedup=form.feeling_before.data,
                      choose_cooldown=form.feeling_after.data,  author=current_user)
@@ -246,6 +246,8 @@ def activities():
         flash('Your post is now live!')
         return redirect(url_for('explore'))
     return render_template('activities.html', form=form)
+
+# MAJOR ISSUES HERE....
 
 
 @app.route('/upload', methods=['POST'])
@@ -257,10 +259,16 @@ def upload():
     content = request.files['inputFile'].read()
     print(file)
     print(type(file))
+    print(content)
+    print(type(content))
+   # werkzeug.datastructures.FileStorag
     # reads file and puts in database
     newFile = FileContents(name=file.filename, dataFit=file.read())
+    print(newFile)
+    print(type(newFile))
+
     # having issues here, need to input .fit file not class object.....
-    # modFile = outputHtml(str(content))
+    #modFile = outputHtml(str(file))
     db.session.add(newFile)
     db.session.commit()
 

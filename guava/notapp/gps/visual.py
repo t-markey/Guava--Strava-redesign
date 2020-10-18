@@ -3,6 +3,7 @@ import numpy
 import notapp.gps.maps as maps
 import notapp.gps.start as start
 
+
 # inputs string of file name
 
 
@@ -27,5 +28,6 @@ def outputHtml(fitFileUpload):
     mapping_code = maps.make_a_map(coordFinal, center=orienting_map)
     print(mapping_code)
 
+
 # for testing
-# outputHtml('AA180527.fit')
+# outputHtml('AA2F0532.FIT')

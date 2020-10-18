@@ -1,4 +1,4 @@
-#from flask import app
+from flask import app
 from notapp import app
 
 
